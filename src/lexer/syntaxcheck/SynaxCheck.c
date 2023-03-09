@@ -25,7 +25,7 @@ void	syntax_check(void)
 			break ;
 		else if (!syntax_error) // sonda | yaptıktan sonra açılan bölümde tekrar sonuna | yaparsak sonusz döngü gibi devam edebilmesi için
 			continue ;
-		if (g_core.lex_table) 
+		if (g_core.lex_table)
 			lex_list = lex_list->next;
 		else
 			lex_list = NULL;
