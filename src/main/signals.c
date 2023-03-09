@@ -14,6 +14,9 @@
 
 void	sig_handler(int signum)
 {
+	ft_printf("\033[0;36m└──\033[0;32m╼\033[0;36m$\n");
+	ft_printf("%s", ft_strtonl(g_core.title.full_title));
+	change_title();
 	(void)signum; // kullanılmayan değişkenler için kullanılır.
 	if (signal_in_reading()) //main pid değilse ve is_read_arg 1 ise direkt exit ile çıkar. main pid'ye eşit olup is_read_arg 1 ise buraya girer
 		return ;
@@ -29,7 +32,7 @@ void	sig_handler(int signum)
 
 int	signal_in_reading(void)
 {
-	if (getpid() != g_core.main_pid && g_core.is_read_arg) // alınan pid main pid değilse ve is_read_arg 1 ilse girer
+	if (g_core.is_read_arg) // alınan pid main pid değilse ve is_read_arg 1 ilse girer
 	{
 		write(1, "\n", 1);
 		free_for_loop(); // alttaki ile beraber leak önlemek için free fonksiyonuları
@@ -48,7 +51,7 @@ int	signal_while_cmd_works(void)
 {
 	t_cmdlist	*cmd_list;
 	int			return_value;
-	change_title(); 
+
 	return_value = 0;
 	cmd_list = g_core.cmd_table; // cmd_table'ı cmd_list'e atar.
 	while (cmd_list) 
@@ -67,7 +70,7 @@ int	signal_while_cmd_works(void)
 
 void	exit_signal_check(void)
 {
-	if (!g_core.cmd)
+	if (!g_core.cmd) 
 	{
 		write(1, "Exit\n", 6);
 		free_core();
