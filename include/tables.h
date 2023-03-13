@@ -55,7 +55,7 @@ typedef struct s_cmdlist
 
 typedef struct s_core
 {
-	int			main_pid;
+	int			pid;
 	int			exec_output;
 	int			old_exec_output;
 	int			heradoc_fd;

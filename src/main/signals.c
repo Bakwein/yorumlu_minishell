@@ -14,8 +14,6 @@
 
 void	sig_handler(int signum)
 {
-	ft_printf("\033[0;36m└──\033[0;32m╼\033[0;36m$\n");
-	ft_printf("%s", ft_strtonl(g_core.title.full_title));
 	change_title();
 	(void)signum; // kullanılmayan değişkenler için kullanılır.
 	if (signal_in_reading()) //main pid değilse ve is_read_arg 1 ise direkt exit ile çıkar. main pid'ye eşit olup is_read_arg 1 ise buraya girer
@@ -32,14 +30,14 @@ void	sig_handler(int signum)
 
 int	signal_in_reading(void)
 {
-	if (g_core.is_read_arg) // alınan pid main pid değilse ve is_read_arg 1 ilse girer
+	ft_printf("%d - %d\n",g_core.is_read_arg, g_core.pid);
+	if (g_core.is_read_arg && g_core.pid == 0) // alınan pid main pid değilse ve is_read_arg 1 ilse girer
 	{
-		write(1, "\n", 1);
 		free_for_loop(); // alttaki ile beraber leak önlemek için free fonksiyonuları
 		free_core();
-		exit(SIGNAL_C); // exit fonksiyonu ile çıkış yapılır.(SIGNAL_C = 130)
+		exit(SIGNAL_C); // exit fonksiyonu ile çıkış yapılır.(SIGNAL_C = 32)
 	}
-	else if (g_core.is_read_arg) // main pid ise ve is_read_arg 1 ise
+	else if (g_core.is_read_arg && g_core.pid !=0) // main pid ise ve is_read_arg 1 ise
 	{
 		g_core.exec_output = SIGNAL_C; // exec_output SIGNAL_C(130) ye eşitlenir.
 		return (1);

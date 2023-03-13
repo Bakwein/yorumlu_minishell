@@ -27,6 +27,7 @@ void get_usrname()
 
 void	init_core(char **env)
 {
+	g_core.pid = -1;
 	fill_envs(env); // env adresi gönderilir
 	set_metachars(); // metachar dizisi oluşturulur
 	get_usrname(); // env'den USER değişkeni ile kullanıcı adı alınır

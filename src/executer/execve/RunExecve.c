@@ -17,6 +17,7 @@ void	run_execve(t_cmdlist *cmd_node, int *fd, int fd_index)
 	char	**envlist;
 
 	cmd_node->pid = fork();
+	ft_printf("asdhasdh\n%d\n",cmd_node->pid);
 	if (!cmd_node->pid)
 	{
 		create_dup(cmd_node, fd, fd_index);
