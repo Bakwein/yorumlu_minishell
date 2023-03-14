@@ -6,7 +6,7 @@
 /*   By: stunca <stunca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:37:58 by hsozan            #+#    #+#             */
-/*   Updated: 2023/02/19 14:49:59 by stunca           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:08:56 by stunca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 void	lexer(void)
 {
 	g_core.lex_table = NULL; // lex_table bagil listesinin baslangic adresi
-	create_lexlist(g_core.cmd, &(g_core.lex_table)); 
+	create_lexlist(g_core.cmd, &(g_core.lex_table)); // cmd'yi parcalayarak lex_table'a liste olarak ekler.
 	classify(g_core.lex_table);
 	syntax_check();
 }

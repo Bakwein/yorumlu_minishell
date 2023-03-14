@@ -58,23 +58,23 @@ size_t	get_cmdlen(char *cmd_line)
 	char	*is_meta;
 
 	count = 0;
-	while (cmd_line && *cmd_line && *cmd_line != ' ') // komut null'a gelene kadar veya bosluga gelene kadar
+	while (cmd_line && *cmd_line && *cmd_line != ' ') // komut null'a gelene kadar veya bosluga gelene kadar devam eder
 	{
 		is_meta = compare_metachars(cmd_line); // komutun indisi metakarakter mi diye kontrol edilir
 		if (is_meta) // eger metakarakter ise
 		{
 			if (!count) // eger count 0 ise (başlangıçta mı)
-				count += ft_strlen(is_meta); // metanin ascii değerini(define ile tanimli) count'a ekler
+				count += ft_strlen(is_meta); // alınan metakarakterin uzunluğunu count'a ekler
 			break ; 
 		}
 		if ((*cmd_line == *SINGLE_QUOTE || *cmd_line == *DOUBLE_QUOTE)) // eger komutun indisi ' ve " ise
 		{
 			quotelen = get_quotelen(cmd_line); // komutun indisi tirnagin uzunlugunu alir
 			count += quotelen; // count'a ekler
-			cmd_line += quotelen; // komutun indisi tirnagin uzunluguna kadar ilerler
+			cmd_line += quotelen; // cmd_line adres olarak tirnagin uzunluguna kadar ilerler
 			continue ; // altta da arttırmasın diye continue
 		}
-		count++;
+		count++; // eger komutun indisi metakarakter ya da tirnak degilse ve space ne NULL ile karşılaşmadığı sürece count arttırılır ve cmd line adresi ilerletilir.
 		cmd_line++;
 	}
 	return (count); // sonda çıkan count'u dondurur

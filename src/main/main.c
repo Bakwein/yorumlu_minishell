@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsozan <hsozan@42kocaeli.tr>               +#+  +:+       +#+        */
+/*   By: stunca <stunca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:39:23 by hsozan            #+#    #+#             */
-/*   Updated: 2023/02/21 12:03:19 by hsozan           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:08:09 by stunca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		update_loop();
-		g_core.cmd = readline(g_core.title.full_title);
-		exit_signal_check(); // ctrl+d sinyali için signalfonksiyonu kullanılır.
+		g_core.cmd = readline(g_core.title.full_title); // yazdığımız şeyi cmd'ye atar.
+		exit_signal_check(); // ctrl+d sinyali için signalfonksiyonu kullanılır.BUNU NASIL ALGILIYOR??????
 		lexer(); // komutu parçalara ayırır.
 		expander(); 
 		parser(); // komutu parse eder.

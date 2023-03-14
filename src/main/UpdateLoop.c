@@ -24,10 +24,10 @@ void	update_history(char *cmd)
 {
 	char	*ptr;
 
-	if (!cmd) 
+	if (!cmd) // bir şey alınmadıysa
 		return ;
-	ptr = cmd;
-	trim_spaces(&ptr);
+	ptr = cmd; 
+	trim_spaces(&ptr); // komutun başındaki boşlukları atar
 	if (!*ptr) // space'lerden arındırılmış komut boşsa
 		return ;
 	add_history(cmd); // komut history'e eklenir

@@ -26,7 +26,7 @@ void	parse_cmd(char **cmd_line, t_lexlist *last_node)
 	size_t	count;
 	char	*holder_content;
 
-	count = get_cmdlen(*cmd_line); // ayıracağı yere kadar olan uzunluğu alır 
+	count = get_cmdlen(*cmd_line); // ayıracağı yere kadar olan uzunluğu alır(ALACAĞI PARÇA UZUNLUĞU)
 	holder_content = (char *)malloc(sizeof(char) * (count) + 1); // +1 null
 	last_node->content = holder_content; // node'un içine atar
 	holder_content[count] = 0; // count. indise yani sonuna null atar
@@ -45,11 +45,11 @@ void	create_lexlist(char *cmdline, t_lexlist **lex_table)
 {
 	t_lexlist	*last_node;
 
-	trim_spaces(&cmdline); // baştaki boşlukları adres olarak atlatır
-	if (!cmdline || !*cmdline) // varsa boşlukları geçtikten sonra komut boşsa
+	trim_spaces(&cmdline); // baştaki boşlukları atlar adresi space kadar ilerletilir.
+	if (!cmdline || !*cmdline) // varsa boşlukları geçtikten sonra komut boşsa(RECURSIVE BURADA SONA ERER)
 		return ;
-	last_node = add_new_lex_node(lex_table); // yeni bir node oluşturur
+	last_node = add_new_lex_node(lex_table); // yeni bir node oluşturur.default atamaları yapar
 	parse_cmd(&cmdline, last_node); // node'u parse eder
-	create_lexlist(cmdline, lex_table); // parse'de son işlemde önceki node'un contentinden sonra değer adres olarak kaldı her seferinde o adres güncellene güncellene recursive gibi devam eder
+	create_lexlist(cmdline, lex_table); // parse'de son işlemde önceki node'un contentinden sonra değer adres(CMDLINE ADRESİ) olarak kaldı her seferinde o adres güncellene güncellene recursive gibi devam eder
 	//recursive gibi sona geldiğinde üstteki if'e gireceğinden fonksiyon sonlanır
 }

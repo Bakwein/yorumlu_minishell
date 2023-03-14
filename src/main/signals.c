@@ -30,7 +30,6 @@ void	sig_handler(int signum)
 
 int	signal_in_reading(void)
 {
-	ft_printf("%d - %d\n",g_core.is_read_arg, g_core.pid);
 	if (g_core.is_read_arg && g_core.pid == 0) // alınan pid main pid değilse ve is_read_arg 1 ilse girer
 	{
 		free_for_loop(); // alttaki ile beraber leak önlemek için free fonksiyonuları

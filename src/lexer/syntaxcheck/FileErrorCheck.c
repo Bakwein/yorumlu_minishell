@@ -16,7 +16,7 @@ int	file_error_check(t_lexlist *lex_list)
 {
 	if (!lex_list->next || (lex_list->next && lex_list->next->type != TEXT)) // eger bir sonraki eleman yoksa veya bir sonraki eleman text değilse (EMİN DEĞİLİM AMA SANIRIM <<,>>,<,> 'den sonra kesinlikle text gelmeli yoksa hata!)
 	{
-		if (lex_list->next) 
+		if (lex_list->next)  // << > ->bash: syntax error near unexpected token `>' --- >> | ->syntax error near unexpected token `|' 
 		{
 			print_error("-bash: syntax error near unexpected token '",
 				lex_list->next->content, "'\n"); // hata mesaji
@@ -24,7 +24,7 @@ int	file_error_check(t_lexlist *lex_list)
 			free_lexer_without_heradoc(lex_list); // hata varsa bagil listeyi sil
 			return (0);
 		}
-		else
+		else // >> ->syntax error near unexpected token `newline'
 		{
 			print_error("-bash: syntax error near unexpected token '",
 				"newline", "'\n"); // hata mesaji
