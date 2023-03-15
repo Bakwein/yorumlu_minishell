@@ -16,12 +16,12 @@ void	expand_envs(char **dst, char *ptr)
 {
 	t_env	*copy_envs;
 
-	copy_envs = g_core.env_table;
+	copy_envs = g_core.env_table; // env_table'ı copy_envs'e kopyalar
 	while (copy_envs)
 	{
-		if (str_compare(ptr, copy_envs->env_name))
-		{
-			own_strjoin(dst, copy_envs->content);
+		if (str_compare(ptr, copy_envs->env_name)) // ptr ile copy_envs->env_name aynı ise
+ 		{
+			own_strjoin(dst, copy_envs->content); // dst'ye copy_envs->content ekler
 			break ;
 		}
 		copy_envs = copy_envs->next;
@@ -30,8 +30,8 @@ void	expand_envs(char **dst, char *ptr)
 
 void	expand_order(char **dst, char **src)
 {
-	if (**src == *DOLLAR)
+	if (**src == *DOLLAR) // src $ ise
 		expand_dollar(dst, src);
-	else
+	else // src ~ ise
 		expand_envs(dst, "HOME");
 }

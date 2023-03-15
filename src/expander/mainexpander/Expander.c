@@ -17,5 +17,5 @@ void	expander(void)
 	if (g_core.exec_output == 2) // eğer exec_output 2 ise(hata kodu-syntax error olması lazım)
 		return ;				 // diğerlerine girer mi BAK!
 	expand_values_from_lexlist();
-	clear_void_contents();
+	clear_void_contents(); // lexlist'teki boş contentleri temizler.
 }

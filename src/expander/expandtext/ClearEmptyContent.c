@@ -21,20 +21,20 @@ void	clear_void_contents(void)
 	temp_lex_list = g_core.lex_table;
 	while (lex_list)
 	{
-		if (!lex_list->content)
+		if (!lex_list->content) // lexlist'in contenti yoksa
 		{
-			if (lex_list == g_core.lex_table)
+			if (lex_list == g_core.lex_table) // lexlist'in ilk elemanı ise
 			{
-				g_core.lex_table = g_core.lex_table->next;
-				temp_lex_list = temp_lex_list->next;
+				g_core.lex_table = g_core.lex_table->next; // lexlist'in ilk elemanını siler. next'i asıl adresi olur.
+				temp_lex_list = temp_lex_list->next; 
 			}
-			else
-				temp_lex_list->next = lex_list->next;
-			free(lex_list);
-			lex_list = temp_lex_list;
+			else // lexlist'in ilk elemanı değilse
+				temp_lex_list->next = lex_list->next; // temp_lex_list'in next'i lexlist'in next'i olur.
+			free(lex_list); // lexlist'i siler.
+			lex_list = temp_lex_list; // lexlist temp_lex_list'e eşitlenir.
 		}
-		temp_lex_list = lex_list;
-		if (lex_list)
+		temp_lex_list = lex_list; // temp_lex_list lexlist'e eşitlenir.
+		if (lex_list) // lexlist varsa
 			lex_list = lex_list->next;
 	}
 }

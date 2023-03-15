@@ -17,14 +17,14 @@ void	expand_values_from_lexlist(void)
 	t_lexlist	*lex_table;
 
 	lex_table = g_core.lex_table;
-	while (lex_table)
+	while (lex_table) // lex table elemanlarının sonuna kadar ilerleyecek
 	{
-		if (lex_table->type == TEXT)
+		if (lex_table->type == TEXT) // lex_table elemanı text ise
 			expand_text(lex_table, 0);
-		else if (lex_table->next && lex_table->type != SIGN_PIPE)
+		else if (lex_table->next && lex_table->type != SIGN_PIPE) // lex_table next'i varsa ve lex_table type'ı pipe değilse
 		{
-			if (lex_table->type != SIGN_DOUBLE_LESS)
-				expand_text(lex_table->next, 1);
+			if (lex_table->type != SIGN_DOUBLE_LESS) // lex_table type'ı double less değilse
+				expand_text(lex_table->next, 1); // BURAYI ANLAMADIM
 			lex_table = lex_table->next;
 		}
 		lex_table = lex_table->next;
@@ -37,23 +37,23 @@ void	expand_text(t_lexlist *lex_table, int is_after_meta)
 	int		flag;
 	char	*ptr;
 
-	cmd = lex_table->content;
+	cmd = lex_table->content; // lex_table contentini cmd'ye atar.
 	ptr = NULL;
 	flag = 0;
-	while (*cmd)
+	while (*cmd) // cmd sonuna kadar ilerleyecek
 	{
-		if (*cmd == '\'' && (!flag || flag == 1))
-			flag = flag ^ 1;
-		else if (*cmd == '\"' && (!flag || flag == 2))
-			flag = flag ^ 2;
-		else if ((!flag || flag == 2) && (*cmd == *DOLLAR || *cmd == *TILDA))
+		if (*cmd == '\'' && (!flag || flag == 1)) // cmd ' ise ve flag 0 veya 1 ise
+			flag = flag ^ 1; // flag 1 ise 0'a eşitlenir, flag 0 ise 1'e eşitlenir.
+		else if (*cmd == '\"' && (!flag || flag == 2)) // cmd " ise ve flag 0 veya 2 ise
+			flag = flag ^ 2; // flag 0 ise 2'ye eşitlenir, flag 2 ise 0'a eşitlenir.
+		else if ((!flag || flag == 2) && (*cmd == *DOLLAR || *cmd == *TILDA)) // flag 0 veya 2 ise ve cmd $ veya ~ ise
 			expand_order(&ptr, &cmd);
 		else
-			str_addchar(&ptr, *cmd);
+			str_addchar(&ptr, *cmd); // ptr'ye cmd'yi ekler.
 		cmd++;
 	}
-	if (is_after_meta && !ptr)
+	if (is_after_meta && !ptr) // is_after_meta 1 ise ve ptr NULL ise
 		return ;
 	free(lex_table->content);
-	lex_table->content = ptr;
+	lex_table->content = ptr; // lex_table contenti değişir, ptr'ye eşitlenir.
 }

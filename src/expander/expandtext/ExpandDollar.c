@@ -16,13 +16,13 @@ void	expand_dollar(char **dst, char **src)
 {
 	char	*ptr;
 
-	ptr = (*src) + 1;
-	if (*ptr == *DOLLAR)
+	ptr = (*src) + 1; // dolardan bir sonraki adres ptr'ye atanır
+	if (*ptr == *DOLLAR) // eğer o da dolar ise girer => $$
 		double_dollar(dst, src);
-	else if (*ptr == *QUSTION_MARK)
+	else if (*ptr == *QUSTION_MARK) // eğer o  soru işareti ise girer => $?
 		question_mark(dst, src);
 	else if (*ptr == ' ' || !*ptr || *ptr == *DOUBLE_QUOTE
-		|| *ptr == *SINGLE_QUOTE)
+		|| *ptr == *SINGLE_QUOTE) // ilk dolardan sonra ' ',NULL," veya ' varsa
 		single_dollar(dst);
 	else
 		expand_dollar_value(dst, src);
@@ -30,15 +30,15 @@ void	expand_dollar(char **dst, char **src)
 
 void	single_dollar(char **dst)
 {
-	str_addchar(dst, *DOLLAR);
+	str_addchar(dst, *DOLLAR); // dst'ye $ ekler
 }
 
 void	double_dollar(char **dst, char **src)
 {
 	char	*line;
 
-	line = ft_itoa(g_core.old_exec_output);
-	own_strjoin(dst, line);
+	line = ft_itoa(g_core.old_exec_output); // old_exec_output int değerini stringe çevirir
+	own_strjoin(dst, line);// dst'ye line'ı ekler
 	free(line);
 	(*src)++;
 }
@@ -47,8 +47,8 @@ void	question_mark(char **dst, char **src)
 {
 	char	*line;
 
-	line = ft_itoa(g_core.old_exec_output);
-	own_strjoin(dst, line);
+	line = ft_itoa(g_core.old_exec_output); // old_exec_output int değerini stringe çevirir
+	own_strjoin(dst, line);  // dst'ye line'ı ekler
 	free(line);
 	(*src)++;
 }
@@ -59,15 +59,15 @@ void	expand_dollar_value(char **dst, char **src)
 	char	*ptr;
 
 	count = 0;
-	ptr = (*src) + 1;
+	ptr = (*src) + 1; // $'dan sonraki adres atanır
 	while (*ptr != ' ' && *(ptr) && *ptr != *DOUBLE_QUOTE
-		&& *ptr != *SINGLE_QUOTE && *ptr != '$')
+		&& *ptr != *SINGLE_QUOTE && *ptr != '$') // $'dan sonraki adres boşluk veya NULL veya " veya ' veya $ değilse count ve adres attırırlır
 	{
 		count++;
 		ptr++;
 	}
-	ptr = ft_strpcpy(NULL, (*src) + 1, count);
-	expand_envs(dst, ptr);
+	ptr = ft_strpcpy(NULL, (*src) + 1, count); // ptr'ye $'dan sonraki adresi ve sonrasını count kadar kopyalar
+	expand_envs(dst, ptr); 
 	free(ptr);
 	*src += count;
 }
