@@ -16,12 +16,12 @@ void	run_heradocs(t_cmdlist *node)
 {
 	t_filelist	*temp_file;
 
-	while (node)
+	while (node) // node sonuna kadar devam eder
 	{
 		temp_file = node->files;
 		while (temp_file)
 		{
-			if (temp_file->metachar[1] == DOUBLE_LESS[1])
+			if (temp_file->metachar[1] == DOUBLE_LESS[1]) // << metacharı varsa
 			{
 				if (!read_heradoc(node, temp_file->filename))
 					return ;

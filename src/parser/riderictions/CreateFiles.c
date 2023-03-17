@@ -16,7 +16,7 @@ void	create_files(t_cmdlist *node)
 {
 	t_filelist	*temp_file;
 
-	if (!node)
+	if (!node) // cmd_table boşsa
 		return ;
 	run_heradocs(node);
 	if (g_core.exec_output || !node)
