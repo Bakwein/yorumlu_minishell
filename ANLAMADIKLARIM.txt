@@ -2,3 +2,14 @@ void	expand_values_from_lexlist(void)'de  ELSE IF KISMINI ANLAMADIM!
 HANGİ ÖRNEKLER ORAYA GİRİYOR
 
 expander'a tekrar bak!
+
+
+METACHAR KULLANIMI(anladıktan sonra expander sonuna tekrardan bak)
+
+$$ BOZUK MU KONTROL GETPID??
+
+echo $\0 ???
+bashde echo $' $" vb. girince > olayı oluyor onu bilecek şekilde '," kontrolü yap
+
+>'nın " çalışmasında sorun yok lakin ' da bashde normak iken ambiguous redirect hatası veriyor???. o da sanırım $ kontrolü yapan bir fonksiyon yüzünden oluyor. O bölüme geldiğinde hata olup olmadığı daha iyi anlaşılır.
+

@@ -28,12 +28,12 @@ void	expand_dollar(char **dst, char **src)
 		expand_dollar_value(dst, src);
 }
 
-void	single_dollar(char **dst)
+void	single_dollar(char **dst) 
 {
 	str_addchar(dst, *DOLLAR); // dst'ye $ ekler
 }
 
-void	double_dollar(char **dst, char **src)
+void	double_dollar(char **dst, char **src) //$$ BU BOZUK MU KONTROL EDİLECEK
 {
 	char	*line;
 
@@ -43,7 +43,7 @@ void	double_dollar(char **dst, char **src)
 	(*src)++;
 }
 
-void	question_mark(char **dst, char **src)
+void	question_mark(char **dst, char **src) //$?
 {
 	char	*line;
 
@@ -53,7 +53,7 @@ void	question_mark(char **dst, char **src)
 	(*src)++;
 }
 
-void	expand_dollar_value(char **dst, char **src)
+void	expand_dollar_value(char **dst, char **src) // ENV ELEMANLARINI KONTROL ETMEK İÇİN
 {
 	int		count;
 	char	*ptr;
@@ -66,8 +66,8 @@ void	expand_dollar_value(char **dst, char **src)
 		count++;
 		ptr++;
 	}
-	ptr = ft_strpcpy(NULL, (*src) + 1, count); // ptr'ye $'dan sonraki adresi ve sonrasını count kadar kopyalar
+	ptr = ft_strpcpy(NULL, (*src) + 1, count); // NULL olan bir adrese $'dan sonraki adresi ve sonrasını count kadar kopyalar ardından bunu ptr'ye yazar
 	expand_envs(dst, ptr); 
 	free(ptr);
-	*src += count;
+	*src += count; // src'yi count kadar ileri atar
 }

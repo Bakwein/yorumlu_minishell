@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-void	expand_envs(char **dst, char *ptr)
+void	expand_envs(char **dst, char *ptr) //ptr adında bir env key'i var mı kontrol eder. varsa contentini boş dst'ye joinler.
 {
 	t_env	*copy_envs;
 
@@ -33,5 +33,5 @@ void	expand_order(char **dst, char **src)
 	if (**src == *DOLLAR) // src $ ise
 		expand_dollar(dst, src);
 	else // src ~ ise
-		expand_envs(dst, "HOME");
+		expand_envs(dst, "HOME"); // üstteki fonksiyonu çağırır. HOME keyinin return değerini dst'ye ekler.
 }
