@@ -14,8 +14,8 @@
 
 void	update_loop(void)
 {
-	g_core.old_exec_output = g_core.exec_output;
-	g_core.exec_output = 0;
+	g_core.old_exec_output = g_core.exec_output; // o an exec_outputta ne varsa old'una atar
+	g_core.exec_output = 0; // alttaki iki değişkeni yenisi için 0'lar YENİ DÖNGÜ BAŞLANGICI
 	g_core.is_read_arg = 0;
 }
 //	update_exec_output();

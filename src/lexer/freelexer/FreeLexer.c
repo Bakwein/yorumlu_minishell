@@ -14,9 +14,9 @@
 
 int	skip_heradoc(t_lexlist **lex, t_lexlist **temp, t_lexlist *stop, int *flag)
 {
-	if (stop == *lex)
+	if (stop == *lex) 
 		*flag |= 1;
-	if ((*lex)->type == SIGN_DOUBLE_LESS && !*flag)
+	if ((*lex)->type == SIGN_DOUBLE_LESS && !*flag) // 
 	{
 		if ((*lex) && (*lex) != stop)
 			*lex = (*lex)->next;

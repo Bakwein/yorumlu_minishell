@@ -30,8 +30,13 @@ void	expand_envs(char **dst, char *ptr) //ptr adında bir env key'i var mı kont
 
 void	expand_order(char **dst, char **src)
 {
-	if (**src == *DOLLAR) // src $ ise
+	if (**src == *DOLLAR) // eğer src'nin ilk elemanı $ ise
 		expand_dollar(dst, src);
-	else // src ~ ise
-		expand_envs(dst, "HOME"); // üstteki fonksiyonu çağırır. HOME keyinin return değerini dst'ye ekler.
+	else
+	{
+		if (**src == *TILDA && *(*src + 1) != *DOUBLE_QUOTE) // eğer src'nin ilk elemanı ~ ise ve src'nin ikinci elemanı " değilse
+			expand_envs(dst, "HOME");
+		else // src'nin ilk elemanı $ değilse, src'nin ilk elemanı ~ değilse ve ~'den sonra " varsa
+			own_strjoin(dst, "~");
+	}
 }

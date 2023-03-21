@@ -29,7 +29,7 @@ void	classify(t_lexlist *lex_table)
 	{
 		metachars = compare_metachars(lex_table->content); // her bir node icin metachar dizisi ile karsilastirilir
 		if (metachars) // eger metachar varsa
-			lex_table->type = (*metachars) * ft_strlen(metachars); // 1 ve 2 uzunlukta olan metacharlar icin uzunluk 1 ise 1 , 2 ise 2 ile metachar'in ilk elemaninin(<,>,|) ascii değeri çarpılır. Bu sonuç bizim define ile tanımladığımız tiplerin değerlerine eşittir.o değerleri ise node'un tipine atarız
+			lex_table->type = (*metachars - 1) * ft_strlen(metachars); // 1 ve 2 uzunlukta olan metacharlar icin uzunluk 1 ise 1 , 2 ise 2 ile metachar'in ilk elemaninin(<,>,|) ascii değeri çarpılır. Bu sonuç bizim define ile tanımladığımız tiplerin değerlerine eşittir.o değerleri ise node'un tipine atarız
 		else // metachar yoksa
 			lex_table->type = 0; // text olarak atarız
 		lex_table = lex_table->next;

@@ -1,12 +1,12 @@
 NAME = minishell
 #NORMALİ
-#CFLAGS	:= -Wall -Werror -Wextra -I $(INCLUDE) /goinfre/homebrew/opt/readline/include
-#READLINE = -lreadline -L /goinfre/homebrew/opt/readline/lib
+CFLAGS	:= -Wall -Werror -Wextra -I $(INCLUDE) /goinfre/homebrew/opt/readline/include
+READLINE = -lreadline -L /goinfre/homebrew/opt/readline/lib
 
 #SEFA
-CFLAGS	:= -Wall -Werror -Wextra -I $(INCLUDE) /Users/sefatunca/homebrew/opt/readline/include
+#CFLAGS	:= -Wall -Werror -Wextra -I $(INCLUDE) /Users/sefatunca/homebrew/opt/readline/include
 #LCFLAGS	:= -Wall -Werror -Wextra -I $(INCLUDE) /usr/include/readline
-READLINE = -lreadline -L /Users/sefatunca/homebrew/opt/readline/lib
+#READLINE = -lreadline -L /Users/sefatunca/homebrew/opt/readline/lib
 #LREADLINE = -L/usr/include -lreadline 
 INCLUDE = -I ./include
 SRC = $(shell find src -name "*.c")

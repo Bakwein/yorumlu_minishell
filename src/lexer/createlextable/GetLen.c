@@ -72,6 +72,7 @@ size_t	get_cmdlen(char *cmd_line)
 			quotelen = get_quotelen(cmd_line); // komutun indisi tirnagin uzunlugunu alir
 			count += quotelen; // count'a ekler
 			cmd_line += quotelen; // cmd_line adres olarak tirnagin uzunluguna kadar ilerler
+			// bunun nedeni tırnaktan sonra ayrı olmayan karakterleri de almak istemesi echo "asdhas"bs -> asdhasbs
 			continue ; // altta da arttırmasın diye continue
 		}
 		count++; // eger komutun indisi metakarakter ya da tirnak degilse ve space ne NULL ile karşılaşmadığı sürece count arttırılır ve cmd line adresi ilerletilir.

@@ -25,7 +25,7 @@ void	syntax_check(void)
 			break ;
 		else if (!syntax_error) // sonda | yaptıktan sonra açılan bölümde tekrar sonuna | yaparsak sonusz döngü gibi devam edebilmesi için
 			continue ;
-		if (g_core.lex_table)
+		if (g_core.lex_table) // yeni eleman eklendiyse ayar çekilir
 			lex_list = lex_list->next;
 		else
 			lex_list = NULL;
@@ -49,9 +49,9 @@ int	syntax_error_check(t_lexlist *lex_list)
 	else if (lex_list->type == SIGN_PIPE) // pipe ise
 	{
 		pipe_error = pipe_error_check(lex_list);
-		if (pipe_error < 0) 
+		if (pipe_error < 0) // | | | gibi bir durumda -1 döner
 			return (0);
-		else if (!pipe_error) // pipe_error 0 dönerse
+		else if (!pipe_error) // pipe_error NULL dönerse -breakler
 			return (-1);
 	}
 	return (1);

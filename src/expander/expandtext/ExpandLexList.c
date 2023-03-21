@@ -53,7 +53,7 @@ void	expand_text(t_lexlist *lex_table, int is_after_meta)
 		cmd++;
 	}
 	if (is_after_meta && !ptr) // is_after_meta 1 ise ve ptr NULL ise
-		return ; // metadan sonra üst kısımda ptr'ye herhangi bir return değeri atanmamışsa freelemeden ve ptr'ye atanmadan çık.NEDENİ sanırım contenti sıfırlamak istememek.????????????????????????????
+		return ; // metadan sonra üst kısımda ptr'ye herhangi bir return değeri atanmamışsa freelemeden ve ptr'ye atanmadan çık.NEDENİ sanırım contenti sıfırlamak istememek.env'deki eleman DEGİSKEN=    gibi bir şey varsa boş dönebilir, "", '' veya başka şeyler xD???????????????????????????????????  EĞER BURAYI YORUM SATIRINA ALIP >> "" girersek seg fault yiyor.normalde ise sonraki kısımlarda hata mesajı return ediyor.
 	free(lex_table->content);
 	lex_table->content = ptr; // lex_table contenti değişir, ptr'ye eşitlenir.
 }

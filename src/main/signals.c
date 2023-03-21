@@ -23,10 +23,15 @@ void	sig_handler(int signum)
 	g_core.exec_output = SIGNAL_C; // exec_output SIGNAL_C(130) ye eşitlenir.
 	write(1, "\n", 1);
 	free_for_loop(); // leak olmaması için freelemek
-	rl_on_new_line(); //imleç konumunun satır başına dönmesini sağlar
-	rl_replace_line("", 0); // ilk parametre olarak verilen boş dize ("") ile, mevcut satırın tamamen silindiği ve yerine boş bir satırın yazıldığı anlamına gelir. İkinci parametre olarak verilen 0, imlecin yeni satıra geçmeden önce mevcut satırda kalmasını sağlar.
-	rl_redisplay(); //  kullanıcının girdi tamponunda yapacağı değişiklikleri yeniden görüntülemesine izin verir.(?)
+	rl_on_new_line(); 
+	rl_replace_line("", 0); 
+	rl_redisplay(); 
 }
+/*
+rl_on_new_line(): Bu fonksiyon, kullanıcının mevcut satırın sonuna geldiğini ve yeni bir satıra geçtiğini belirtmek için kullanılır. Yani, mevcut satırın sonunda bir '\n' karakteri varmış gibi hareket eder.
+rl_replace_line("", 0): Bu fonksiyon, mevcut satırı tamamen siler ve yerine boş bir satır ekler. İkinci parametre, mevcut satırın uzunluğunu belirtir. Bu örnekte, 0 olarak belirtilmiştir, bu da mevcut satırın uzunluğunu bilmediğimizi ve tamamen silmek istediğimizi gösterir.
+rl_redisplay(): Bu fonksiyon, kullanıcıya gösterilen satırı yeniler. Bu, mevcut satırın içeriğinde yapılan değişikliklerin hemen görünür hale gelmesini sağlar.
+*/
 
 int	signal_in_reading(void)
 {
@@ -57,14 +62,21 @@ int	signal_while_cmd_works(void)
 			return_value |= waitpid(cmd_list->pid, 0, 0);  // return_value = return_value | waitpid(cmd_list->pid, 0, 0); işlemi yapar. sadece 2si 0 olduğunda 0 aksi takdirde 1 döndürür.
 		cmd_list = cmd_list->next;
 	}
-	if (return_value) // return_value 1 ise 
+	if (return_value) // return_value 1 ise(EMİN DEĞİLİM AMA EĞER ÜSTTEKİ IF'E CHILD HARİCİ DEĞER GELDİĞİ DURUMDA BURAYA GİRER)
 	{
 		write(1, "\n", 1);
 		return (1);
 	}
 	return (0);
 }
+/*
+waitpid fonksiyonu, bir çocuk işlemi için ana işlemin beklemesini sağlar ve işlemin durumunu rapor eder.
+pid_t waitpid(pid_t pid, int *status, int options);
+status: Çocuk işlemin bitiş durumunu tutacak bir tamsayı göstericisi. Bu gösterici, çocuk işlem için rapor edilen çıkış kodunu ve diğer bilgileri içerir.
+options: Bekleme davranışını kontrol eden bir bit haritası. Bu parametre, farklı bayrakların birleştirilmesiyle oluşturulabilir.
 
+waitpid fonksiyonu, başarı durumunda çocuk işlemin PID'sini döndürür. Eğer bekleyen çocuk işlem yoksa veya hata oluşursa -1 döndürür ve errno değişkenine uygun hata kodunu yerleştirir.
+*/
 void	exit_signal_check(void)
 {
 	if (!g_core.cmd) 
