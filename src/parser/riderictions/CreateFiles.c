@@ -19,17 +19,17 @@ void	create_files(t_cmdlist *node)
 	if (!node) // cmd_table boşsa
 		return ;
 	run_heradocs(node);
-	if (g_core.exec_output || !node)
+	if (g_core.exec_output || !node) // node boşsa ve exec_output 1 ise
 		return ;
 	while (node)
 	{
 		temp_file = node->files;
 		while (temp_file)
 		{
-			if (*temp_file->metachar == *SINGLE_GREAT)
+			if (*temp_file->metachar == *SINGLE_GREAT) // >,>> metacharı varsa
 				create_outfile(node, temp_file);
 			else
-				create_infile(node, temp_file);
+				create_infile(node, temp_file); 
 			if (temp_file->fd == SSTDERR)
 			{
 				g_core.exec_output = 1;
