@@ -15,7 +15,7 @@
 void	parser(void)
 {
 	g_core.cmd_table = NULL; // komut tablosunu NULL yapar.
-	create_cmdtable(g_core.lex_table); // cmdtable oluşturur.
+	create_cmdtable(g_core.lex_table); // lex_table'dan cmdtable oluşturur.
 	fill_cmdtable(); //CMD_TABLE'ı doldurur.
 	create_files(g_core.cmd_table);
 }

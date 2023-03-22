@@ -14,9 +14,9 @@
 
 void	executer(void)
 {
-	if (!g_core.cmd_table)
+	if (!g_core.cmd_table) // komut tablosu boşsa
 		return ;
-	else if (!g_core.cmd_table->next)
+	else if (!g_core.cmd_table->next) // tek komut varsa
 		run_single_command(g_core.cmd_table, NULL);
 	else
 		run_multiple_command(g_core.cmd_table);
